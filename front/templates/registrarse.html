@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block titulo %}{{ titulo }}{% endblock %}
+
+{% block body %}
+
+<h1>Crear una cuenta</h1>
+<p>Completá tus datos para unirte a la plataforma.</p>
+
+<form id="formRegistro">
+
+    <!-- Datos de usuario -->
+    <section>
+        <h2>Información básica</h2>
+
+        <label for="usuario">Nombre de Usuario</label><br>
+        <input type="text" id="usuario" name="nombre_usuario" class="form-control" placeholder="👤 Ingresá un nombre de usuario" required><br>
+
+        <label for="mail">E-Mail</label><br>
+        <input type="email" id="mail" name="email_usuario" class="form-control" placeholder="📧 Escribí tu e-mail" required><br>
+
+        <label for="confirmar_mail">Confirmar E-Mail</label><br>
+        <input type="email" id="confirmar_mail" name="email_confirmacion" class="form-control" placeholder="📧 Repetí tu e-mail" required><br>
+
+        <label for="password_user">Contraseña</label><br>
+        <input type="password" id="password_user" name="contraseña_usuario" class="form-control" placeholder="🔒 Elegí una contraseña" required><br>
+    </section>
+
+    <!-- Información de contacto -->
+    <section>
+        <h2>Datos de contacto</h2>
+
+        <label for="nro_telefono">Teléfono</label><br>
+        <input type="number" id="nro_telefono" name="telefono_usuario" class="form-control" placeholder="📱 Número de teléfono" required><br>
+
+        <label for="direccion_user">Dirección</label><br>
+        <input type="text" id="direccion_user" name="direccion_usuario" class="form-control" placeholder="🏡 Tu dirección" required><br>
+
+        <label for="dni_user">DNI</label><br>
+        <input type="number" id="dni_user" name="dni_usuario" class="form-control" placeholder="🪪 Número de DNI" required><br>
+
+        
+    </section>
+
+    <button type="submit" id="envio" class="btn-formulario">Registrarme</button>
+
+</form>
+
+<script>
+document.getElementById("formRegistro").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const response = await fetch("https://larao.pythonanywhere.com/datos/registrar", {
+        method: "POST",
+        body: formData
+    });
+    const data = await response.json();
+    if (data.error) {
+        alert(data.error);
+        return;
+    }
+    window.location.href = "{{ url_for('iniciar_sesion_bp.iniciar_sesion') }}";
+});
+</script>
+
+<p>¿Ya tenés cuenta? Podés iniciar sesión <a href="{{ url_for('iniciar_sesion_bp.iniciar_sesion') }}">desde acá</a>.</p>
+
+{% endblock %}

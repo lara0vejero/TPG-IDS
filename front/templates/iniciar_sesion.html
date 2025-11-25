@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block titulo %}{{ titulo }}{% endblock %}
+
+{% block body %}
+
+<h1>Acceder a tu cuenta</h1>
+<p>Ingresá tus datos para continuar.</p>
+
+<form action="{{ url_for('iniciar_sesion_bp.iniciar_sesion') }}" method="post">
+
+    <!-- Usuario o email -->
+    <div>
+        <label for="usuario_o_mail">Usuario o E-Mail</label><br>
+        <input type="text" id="usuario_o_mail" 
+            name="usuario_o_mail" 
+            class="form-control" 
+            placeholder="📧 Ingresá tu usuario o correo" 
+            required><br>
+    </div>
+
+    <!-- Contraseña -->
+    <div>
+        <label for="password">Contraseña</label><br>
+        <input type="password" id="password" 
+            name="contrasena_usuario" 
+            class="form-control" 
+            placeholder="🔒 Ingresá tu contraseña" 
+            required><br>
+    </div>
+
+    <button type="submit" id="envio" class="btn-formulario">
+        Entrar
+    </button>
+</form>
+
+<p>¿No tenés cuenta todavía? Podés registrarte 
+<a href="{{ url_for('registrarse_bp.registrarse') }}">acá</a>.
+</p>
+
+{% endblock %}

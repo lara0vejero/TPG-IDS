@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block titulo %}Solicitud inválida{% endblock %}
+
+{% block body %}
+    <h1>Error 400</h1>
+    <p>La solicitud realizada no es válida.</p>
+    <a href="{{ url_for('index_bp.index') }}">Volver al inicio</a>
+{% endblock %}
