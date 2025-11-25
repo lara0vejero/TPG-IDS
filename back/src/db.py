@@ -1,14 +1,22 @@
+import os
+from dotenv import load_dotenv
 import mysql.connector
 from mysql.connector import Error
 
-
-DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": "",
-    "database": "ElPortalLiterario_db",
-}
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+DOTENV_PATH = os.path.join(BASE_DIR, ".env")
+load_dotenv(DOTENV_PATH)
 
 def get_connection():
-    """Devuelve una conexión nueva a la base de datos."""
-    return mysql.connector.connect(**DB_CONFIG)
+    try:
+        connection = mysql.connector.connect(
+            host=os.getenv("DB_HOST"),
+            port=int(os.getenv("DB_PORT")),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            database=os.getenv("DB_NAME"),
+        )
+        return connection
+    except Error as e:
+        print("No se pudo conectar a MySQL", e)
+        return None
