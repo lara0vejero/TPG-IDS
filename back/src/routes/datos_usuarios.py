@@ -4,18 +4,19 @@ from db import get_connection
 
 datos_usuarios_bp = Blueprint("datos_usuarios", __name__)
 
-# POST /datos/registrar
 @datos_usuarios_bp.route("/registrar", methods=["POST"])
 def registrar_usuario():
-    data = request.get_json() or {}
-    nombre = data.get("nombre")
-    email = data.get("email")
-    contraseña = data.get("contraseña")
+    data = request.get_json(silent=True) or request.form.to_dict()
+
+    nombre = data.get("nombre_usuario")
+    email = data.get("email_usuario")
+    contraseña = data.get("contraseña_usuario")
     telefono = data.get("telefono_usuario")
     direccion = data.get("direccion_usuario")
-    legajo = data.get("legajo_usuario")
+    dni = data.get("dni_usuario")
 
-    if not all([nombre, email, contraseña, telefono, direccion, legajo]):
+
+    if not all([nombre, email, contraseña, telefono, direccion]):
         return jsonify({"error": "Faltan datos"}), 400
     coneccion = get_connection()
     cursor = coneccion.cursor(dictionary=True)
@@ -41,7 +42,7 @@ def registrar_usuario():
                  telefono_usuario, direccion_usuario, dni_usuario)
             VALUES (%s, %s, %s, %s, %s, %s)
             """,
-            (nombre, email, contraseña_hash, telefono, direccion, legajo),
+            (nombre, email, contraseña_hash, telefono, direccion, dni),
         )
         coneccion.commit()
         user_id = cursor.lastrowid

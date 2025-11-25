@@ -4,7 +4,7 @@ import mysql.connector
 from mysql.connector import Error
 
 # Ruta ABSOLUTA al .env
-ENV_PATH = "/home/laraO/TPG-IDS/.env"
+ENV_PATH = "/home/laraO/TPG-IDS/TPG-IDS/.env"
 
 # Cargar variables
 load_dotenv(ENV_PATH)

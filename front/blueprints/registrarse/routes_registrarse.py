@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, current_app, jsonify
+from flask import Blueprint, render_template, request, redirect, url_for, current_app, flash
 import requests
 
 registrarse_bp = Blueprint("registrarse_bp", __name__)
@@ -9,11 +9,10 @@ def registrarse():
     titulo = "Registrarse"
     BACK_URL = current_app.config.get("BACK_URL")
 
-    # ---------- GET: mostrar formulario ----------
     if request.method == "GET":
         return render_template("registrarse.html", titulo=titulo)
 
-    # ---------- POST: procesar registro ----------
+    # ---------- POST ----------
     usuario = request.form.get("nombre_usuario")
     mail = request.form.get("email_usuario")
     mail_conf = request.form.get("email_confirmacion")
@@ -22,26 +21,35 @@ def registrarse():
     direccion = request.form.get("direccion_usuario")
     dni = request.form.get("dni_usuario")
 
-    # ------- Validaciones básicas -------
-    if not all([usuario, mail, mail_conf, contrasena]):
-        return jsonify({"error": "Faltan campos obligatorios"}), 400
+    # Validación de campos obligatorios
+    if not all([usuario, mail, mail_conf, contrasena, telefono, direccion, dni]):
+        flash("Faltan campos obligatorios", "error")
+        return redirect(url_for("registrarse_bp.registrarse"))
 
     if mail != mail_conf:
-        return jsonify({"error": "Los mails no coinciden"}), 400
+        flash("Los correos no coinciden", "error")
+        return redirect(url_for("registrarse_bp.registrarse"))
 
-    # ------- Datos listos para enviar al backend -------
+    # Datos a enviar al backend
     data = {
-        "nombre": usuario,
-        "email": mail,
-        "contraseña": contrasena,
+        "nombre_usuario": usuario,
+        "email_usuario": mail,
+        "contraseña_usuario": contrasena,
         "telefono_usuario": telefono,
         "direccion_usuario": direccion,
-        "legajo_usuario": dni
+        "dni_usuario": dni
     }
 
-    # ------- Enviar al backend -------
-    if BACK_URL:
-        requests.post(f"{BACK_URL}/datos/registrar", json=data)
+    # Enviar datos al backend
+    try:
+        response = requests.post(f"{BACK_URL}/datos/registrar", data=data)
 
-    # ------- Redirigir al login -------
-    return redirect(url_for("iniciar_sesion_bp.iniciar_sesion"))
+        if response.status_code == 201:
+            return redirect(url_for("iniciar_sesion_bp.iniciar_sesion"))
+        else:
+            flash("Hubo un error al registrarte: " + response.text, "error")
+            return redirect(url_for("registrarse_bp.registrarse"))
+
+    except Exception as e:
+        flash(f"Error de conexión con el servidor: {e}", "error")
+        return redirect(url_for("registrarse_bp.registrarse"))

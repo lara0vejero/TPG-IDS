@@ -22,8 +22,8 @@ from blueprints.form_intercambio.form_intercambio import form_intercambio_bp
 app = Flask(__name__)
 app.secret_key = "super_secret_key"
 
-# URL del Backend (permitido, NO es variable global: es config de Flask)
-app.config["BACK_URL"] = "https://laru.pythonanywhere.com"
+# URL del Backend 
+app.config["BACK_URL"] = "https://laraO.pythonanywhere.com"
 
 # REGISTRO DE BLUEPRINTS
 
