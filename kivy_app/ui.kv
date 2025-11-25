@@ -1,0 +1,42 @@
+<HomeScreen>:
+    FloatLayout:
+        # Imagen de fondo
+        Image:
+            source: "assets/bg_home.jpg"
+            allow_stretch: True
+            keep_ratio: False
+            size: self.parent.size
+            pos: self.parent.pos
+
+        # Contenido centrado
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: 1, None
+            height: self.minimum_height
+            pos_hint: {"center_y": 0.55}
+
+            Label:
+                text: "¡BIENVENIDO!"
+                font_size: 40
+                bold: True
+                color: 1,1,1,1
+                size_hint_y: None
+                height: 80
+
+            Label:
+                text: "Encontrá el libro que necesitás o ayudá a otro estudiante compartiendo el tuyo."
+                halign: "center"
+                valign: "middle"
+                color: 1,1,1,1
+                size_hint_y: None
+                height: 100
+                text_size: self.width, None
+
+            Label:
+                text: "Iniciá sesión o creá tu cuenta para empezar a intercambiar libros y apuntes."
+                halign: "center"
+                valign: "middle"
+                color: 1,1,1,1
+                size_hint_y: None
+                height: 100
+                text_size: self.width, None

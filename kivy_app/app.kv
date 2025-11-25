@@ -1,0 +1,46 @@
+#:kivy 2.3.0
+
+<MainScreenManager>:
+
+<LoginScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: 40
+        spacing: 20
+
+        Label:
+            text: "Iniciar sesión"
+            font_size: 32
+
+        TextInput:
+            id: email_input
+            hint_text: "Email"
+            multiline: False
+
+        TextInput:
+            id: password_input
+            hint_text: "Contraseña"
+            password: True
+            multiline: False
+
+        Button:
+            text: "Ingresar"
+            size_hint_y: None
+            height: 50
+            on_press: root.do_login()
+
+<HomeScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: 40
+        spacing: 20
+
+        Label:
+            text: "Bienvenida!"
+            font_size: 32
+
+        Button:
+            text: "Cerrar sesión"
+            size_hint_y: None
+            height: 50
+            on_press: app.root.current = "login"
