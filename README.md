@@ -1,31 +1,183 @@
-📚 TPG – Introducción al Desarrollo de Software
+# 📚 TPG – Introducción al Desarrollo de Software (2C2025)
+## 📖 Plataforma de Intercambio de Libros entre Estudiantes
 
-Trabajo Práctico Grupal – Lanzillotta – 2C2025
+Este repositorio contiene el desarrollo completo del Trabajo Práctico Grupal de la materia Introducción al Desarrollo de Software (FIUBA – Cátedra Lanzillotta, 2° cuatrimestre 2025).
 
-🧩 Descripción General
+El proyecto propone una plataforma web y mobile diseñada para facilitar el intercambio de material bibliográfico entre estudiantes universitarios, promoviendo una comunidad colaborativa, accesible y sostenible.
 
-Este proyecto propone el desarrollo de una plataforma web pensada para facilitar el intercambio de material bibliográfico entre estudiantes universitarios. El objetivo principal es brindar un espacio organizado, accesible y confiable donde los alumnos puedan encontrar, ofrecer y solicitar libros de manera sencilla.
+---
 
-🎯 Objetivo
+# 🎯 Objetivo General
 
-La iniciativa busca promover una comunidad colaborativa basada en el intercambio justo: cada usuario puede acceder a libros que necesita ofreciendo a cambio ejemplares que ya no utiliza. De esta manera, se fomenta un circuito de reutilización que beneficia a todos los participantes.
+Crear un sistema que permita a los estudiantes:
+- Intercambiar libros y apuntes de manera sencilla.
+- Encontrar material para sus cursadas sin costos adicionales.
+- Ofrecer libros que ya no utilicen.
+- Reducir gastos y fomentar la reutilización.
 
-🛠️ Alcance del Proyecto
+---
 
-El sistema incluirá:
+## 👤 Gestión de Usuarios
+- Registro con validación completa.
+- Inicio de sesión seguro.
+- Perfiles personales.
 
-Un sitio web moderno, intuitivo y fácil de navegar, con diseño centrado en la experiencia del usuario.
+## 📚 Gestión de Libros
+- Publicación de libros con título, autor, editorial, ISBN, temática e imagen.
+- Listado de libros publicados.
+- Administración de libros propios.
 
-Registro y autenticación de usuarios, permitiendo crear perfiles personales.
+## 🔁 Sistema de Intercambio
+- Solicitud de intercambio entre usuarios.
+- Generación de códigos únicos.
+- Seguimiento del estado del intercambio.
 
-Publicación de libros disponibles, con detalles relevantes para su identificación.
+## 🌐 Frontend Web
+- Interfaz moderna, intuitiva y responsive.
+- Secciones: Inicio, Biblioteca, Funcionamiento, Contacto, Sobre Nosotros.
+- Formularios conectados al backend via RestFull
 
-Búsqueda y solicitud de material según las necesidades de cada estudiante.
+## 🖥️ Backend REST
+- API desarrollada con Flask.
+- Endpoints para usuarios y libros.
+- Hashing de contraseñas.
+- Persistencia en MySQL.
 
-Modelo de intercambio donde el acceso a un libro implica ofrecer otro a la comunidad.
+## 📱 App Mobile (Kivy)
+- Login y navegación básica.
+- Prueba de concepto mobile incluida como bonus.
 
-El enfoque busca agilizar los procesos habituales de préstamo entre alumnos, centralizando toda la información y simplificando la interacción.
+---
 
-🤝 Comunidad y valor agregado
+# 🏗️ Arquitectura del Sistema
 
-La plataforma no solo apunta a resolver una necesidad académica concreta, sino también a fortalecer el vínculo entre estudiantes mediante un sistema colaborativo que promueve la circulación de recursos sin costos adicionales.
+Estructura general del repositorio:
+
+TPG-IDS/
+ ├── back/          → API REST (Flask)
+ ├── front/         → Web con Flask Templates
+ ├── mobile/        → App hecha con Kivy
+
+Frontend y Backend corren separados:
+- Frontend → http://localhost:5000
+- Backend  → http://localhost:5002
+
+---
+
+# 📦 Dependencias Utilizadas
+
+## 🟦 Backend (Flask)
+- Flask
+- Flask-CORS
+- Flask-Session
+- Flask-Mail
+- mysql-connector-python
+- python-dotenv
+- Werkzeug
+- Despliegue del backend en PythonAnywhere para pruebas online
+
+---
+
+## 🟩 Frontend (Flask Web)
+- Flask
+- Bootstrap
+- JQuery
+- Swiper.js
+- Google Fonts
+- Requests
+
+---
+
+## 🟧 Mobile (Kivy)
+- Kivy
+- KivyMD
+- Requests
+
+---
+
+# 🚀 Cómo Ejecutar el Proyecto Localmente
+
+## 1️⃣ Backend
+cd back/src
+python3 app.py
+
+Disponible en:
+http://localhost:5002
+
+---
+
+## 2️⃣ Frontend
+cd front
+python3 app.py
+
+Disponible en:
+http://localhost:5000
+
+---
+
+## 3️⃣ App Mobile
+cd mobile/kivy_app
+python3 main.py
+
+---
+
+# 🛢️ Base de Datos (MySQL)
+
+### datos_usuario
+- id
+- nombre_usuario
+- email_usuario
+- contraseña_usuario (hash)
+- telefono_usuario
+- direccion_usuario
+- dni_usuario
+
+### libros
+- id
+- usuario_id
+- título
+- autor
+- editorial
+- ISBN
+- temática
+- imagen
+- estado
+
+### intercambio_libro
+- id
+- id_libro_solicitado
+- id_libro_ofrecido
+- id_usuario_solicitado
+- id_usuario_ofrecido
+- estado
+
+Script SQL: back/src/init_db.sql
+
+---
+
+# 🧪 Pruebas Realizadas
+
+- Validación de formularios del front.
+- Requests al backend con respuestas OK y errores.
+- Manejo de estados HTTP (400, 401, 404).
+- Hashing y verificación de contraseñas.
+- Testing de endpoints.
+- Pruebas en mobile.
+
+---
+
+# 🔐 Buenas Prácticas Aplicadas
+
+- Hash seguro de contraseñas.
+- Separación estricta front/back.
+- Blueprints.
+- Variables de entorno (.env).
+- Manejo correcto de CORS.
+- Sanitización de datos.
+
+---
+
+# 🤝 Equipo de Desarrollo
+
+- Abril Martinelli
+- Lara Ovejero
