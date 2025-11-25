@@ -22,8 +22,9 @@ from blueprints.form_intercambio.form_intercambio import form_intercambio_bp
 app = Flask(__name__)
 app.secret_key = "super_secret_key"
 
-# URL del Backend (ACÁ está el cambio que hizo tu amiga)
+# URL del Backend (hosteado con pythonanywhere)
 app.config["BACK_URL"] = "https://laru.pythonanywhere.com"
+
 
 # VARIABLES GLOBALES
 

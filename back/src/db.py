@@ -6,7 +6,7 @@ DB_CONFIG = {
     "host": "localhost",
     "user": "root",
     "password": "",
-    "database": "libroxlibro_db",
+    "database": "ElPortalLiterario_db",
 }
 
 def get_connection():
