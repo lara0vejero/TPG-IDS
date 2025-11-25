@@ -22,15 +22,8 @@ from blueprints.form_intercambio.form_intercambio import form_intercambio_bp
 app = Flask(__name__)
 app.secret_key = "super_secret_key"
 
-# URL del Backend (hosteado con pythonanywhere)
-app.config["BACK_URL"] = "https://laraO.pythonanywhere.com"
-
-
-# VARIABLES GLOBALES
-
-@app.context_processor
-def inject_globals():
-    return dict(BACK_URL=app.config["BACK_URL"])
+# URL del Backend (permitido, NO es variable global: es config de Flask)
+app.config["BACK_URL"] = "https://laru.pythonanywhere.com"
 
 # REGISTRO DE BLUEPRINTS
 
@@ -59,7 +52,6 @@ def server_error(e):
     return render_template("500.html"), 500
 
 # EJECUCIÓN DEL SERVIDOR
-
 if __name__ == "__main__":
     print("Flask corriendo en http://localhost:5000")
     app.run(host="localhost", port=5000, debug=True)
