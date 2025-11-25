@@ -3,10 +3,10 @@ from mysql.connector import Error
 import os
 
 DB_CONFIG = {
-    "host": "laru.mysql.pythonanywhere-services.com",
-    "user": "laru",
-    "password": "lara23120412",
-    "database": "laru$default"
+    "host": "laraO.mysql.pythonanywhere-services.com",
+    "user": "laraO",
+    "password": "portal2025",
+    "database": "laraO$default"
 }
 
 def execute_sql_file(filename):

@@ -23,7 +23,7 @@ app = Flask(__name__)
 app.secret_key = "super_secret_key"
 
 # URL del Backend (hosteado con pythonanywhere)
-app.config["BACK_URL"] = "https://laru.pythonanywhere.com"
+app.config["BACK_URL"] = "https://laraO.pythonanywhere.com"
 
 
 # VARIABLES GLOBALES

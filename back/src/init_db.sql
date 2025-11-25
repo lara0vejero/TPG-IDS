@@ -1,15 +1,14 @@
-CREATE DATABASE IF NOT EXISTS ElPortalLiterario_db;
-USE ElPortalLiterario_db;
+CREATE DATABASE IF NOT EXISTS libroxlibro_db;
+USE libroxlibro_db;
 
 CREATE TABLE IF NOT EXISTS datos_usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre_usuario VARCHAR(50),
     email_usuario VARCHAR(100),
     contraseña_usuario VARCHAR(100),
-    telefono_usuario INT(100),
+    telefono_usuario VARCHAR(100),
     direccion_usuario VARCHAR(100),
-    dni_usuario INT (8),
-    legajo_usuario INT (6)
+    dni_usuario VARCHAR (8)
 );
 
 CREATE TABLE IF NOT EXISTS libros (
@@ -19,8 +18,9 @@ CREATE TABLE IF NOT EXISTS libros (
     titulo VARCHAR(100),
     autor VARCHAR(100),
     editorial VARCHAR(255),
-    codigo_isbn INT (100),
+    codigo_isbn VARCHAR (100),
     tematica VARCHAR (100),
+    imagen VARCHAR(255),
     
     fecha_carga DATETIME DEFAULT CURRENT_TIMESTAMP,
 

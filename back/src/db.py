@@ -3,9 +3,11 @@ from dotenv import load_dotenv
 import mysql.connector
 from mysql.connector import Error
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-DOTENV_PATH = os.path.join(BASE_DIR, ".env")
-load_dotenv(DOTENV_PATH)
+# Ruta ABSOLUTA al .env
+ENV_PATH = "/home/laraO/TPG-IDS/.env"
+
+# Cargar variables
+load_dotenv(ENV_PATH)
 
 def get_connection():
     try:
@@ -14,9 +16,9 @@ def get_connection():
             port=int(os.getenv("DB_PORT")),
             user=os.getenv("DB_USER"),
             password=os.getenv("DB_PASSWORD"),
-            database=os.getenv("DB_NAME"),
+            database=os.getenv("DB_NAME")
         )
         return connection
     except Error as e:
-        print("No se pudo conectar a MySQL", e)
+        print("❌ Error conectando a MySQL:", e)
         return None
