@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block titulo %}Mis Libros{% endblock %}
+
+{% block body %}
+<h1>Mis libros</h1>
+
+{% if not libros %}
+    <p>No tenés libros cargados.</p>
+    <a href="{{ url_for('cargar_libro_bp.cargar_libros') }}" class="btn btn-primary">Cargar un libro</a>
+{% else %}
+
+<div class="row">
+    {% for libro in libros %}
+    <div class="col-md-3 mb-4">
+        <div class="card">
+            <img src="{{ URL_BACK_IMAGEN }}{{ libro.imagen or 'default.png' }}" class="card-img-top">
+
+            <div class="card-body">
+                <h5 class="card-title">{{ libro.titulo }}</h5>
+                <p class="card-text">
+                    Autor: {{ libro.autor }} <br>
+                    Estado: <strong>{{ libro.estado_del_libro }}</strong>
+                </p>
+
+                <!-- Cambiar estado -->
+                <form action="{{ url_for('mis_libros_bp.cambiar_estado', libro_id=libro.id) }}" method="post">
+                    <select name="estado" class="form-select" onchange="this.form.submit()">
+                        <option value="disponible" 
+                        {% if libro.estado_del_libro == 'disponible' %}
+                            selected
+                        {% endif %}>
+                            Disponible
+                        </option>
+                        <option value="pausa" 
+                        {% if libro.estado_del_libro == 'pausa' %}
+                            selected
+                        {% endif %}>
+                            Pausa
+                        </option>
+                    </select>
+                </form>
+
+                <!-- Eliminar -->
+                {% if libro.estado_del_libro == 'disponible' %}
+                <form action="{{ url_for('mis_libros_bp.eliminar', libro_id=libro.id) }}" method="post" class="mt-2">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endif %}
+{% endblock %}
