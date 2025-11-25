@@ -15,9 +15,9 @@ def registrarse():
 
     # ---------- POST: procesar registro ----------
     usuario = request.form.get("nombre_usuario")
-    mail = request.form.get("email_registro")
+    mail = request.form.get("email_usuario")
     mail_conf = request.form.get("email_confirmacion")
-    contrasena = request.form.get("contrasena_registro")
+    contrasena = request.form.get("contraseña_usuario")
     telefono = request.form.get("telefono_usuario")
     direccion = request.form.get("direccion_usuario")
     dni = request.form.get("dni_usuario")
@@ -33,10 +33,10 @@ def registrarse():
     data = {
         "nombre": usuario,
         "email": mail,
-        "contrasena": contrasena,
-        "telefono": telefono,
-        "direccion": direccion,
-        "dni": dni
+        "contraseña": contrasena,
+        "telefono_usuario": telefono,
+        "direccion_usuario": direccion,
+        "legajo_usuario": dni
     }
 
     # ------- Enviar al backend -------

@@ -21,7 +21,7 @@ def iniciar_sesion():
 
     # Datos que se envían al backend
     payload = {
-        "email_nombre_usuario": usuario_input,
+        "identificador": usuario_input,
         "contraseña": clave_input
     }
 
