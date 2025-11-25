@@ -15,45 +15,51 @@ def registrar_usuario():
     direccion = data.get("direccion_usuario")
     dni = data.get("dni_usuario")
 
-
     if not all([nombre, email, contraseña, telefono, direccion]):
         return jsonify({"error": "Faltan datos"}), 400
+
     coneccion = get_connection()
-    cursor = coneccion.cursor(dictionary=True)
+    cursor = coneccion.cursor(dictionary=True, buffered=True)
+
     try:
-        # Verificar duplicado por email o nombre
-        cursor.execute(
-            """
-            SELECT id 
-            FROM datos_usuario 
+        # --- PRIMER SELECT ---
+        cursor.execute("""
+            SELECT id
+            FROM datos_usuario
             WHERE email_usuario = %s OR nombre_usuario = %s
-            """,
-            (email, nombre),
-        )
+        """, (email, nombre))
+
         mail_existente = cursor.fetchone()
+
+        # *** EVITA EL ERROR DE PYTHONANYWHERE ***
+        cursor.fetchall()   # limpia resultados pendientes
+
         if mail_existente:
             return jsonify({"error": "Usuario o email ya registrado"}), 400
+
         contraseña_hash = generate_password_hash(contraseña)
 
-        cursor.execute(
-            """
+        # --- INSERT ---
+        cursor.execute("""
             INSERT INTO datos_usuario
                 (nombre_usuario, email_usuario, contraseña_usuario,
                  telefono_usuario, direccion_usuario, dni_usuario)
             VALUES (%s, %s, %s, %s, %s, %s)
-            """,
-            (nombre, email, contraseña_hash, telefono, direccion, dni),
-        )
+        """, (nombre, email, contraseña_hash, telefono, direccion, dni))
+
         coneccion.commit()
         user_id = cursor.lastrowid
 
         return jsonify({"user_id": user_id}), 201
+
     except Exception as e:
         coneccion.rollback()
         return jsonify({"error": str(e)}), 500
+
     finally:
         cursor.close()
         coneccion.close()
+
 
 @datos_usuarios_bp.route("/login", methods=["POST"])
 def login_usuario():

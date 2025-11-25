@@ -7,57 +7,46 @@
 <h1>Crear una cuenta</h1>
 <p>Completá tus datos para unirte a la plataforma.</p>
 
-<form action="{{ url_for('registrarse_bp.registrarse') }}" method="POST">
+<form action="https://laraO.pythonanywhere.com/datos/registrar" method="POST">
 
-    <div class="mb-3">
-        <label for="nombre_usuario" class="form-label">Nombre de Usuario</label>
-        <input type="text" class="form-control" id="nombre_usuario" 
-               name="nombre_usuario" required>
-    </div>
 
-    <div class="mb-3">
-        <label for="email_usuario" class="form-label">E-Mail</label>
-        <input type="email" class="form-control" id="email_usuario" 
-               name="email_usuario" required>
-    </div>
+    <!-- Datos de usuario -->
+    <section>
+        <h2>Información básica</h2>
 
-    <div class="mb-3">
-        <label for="email_confirmacion" class="form-label">Confirmar E-Mail</label>
-        <input type="email" class="form-control" id="email_confirmacion" 
-               name="email_confirmacion" required>
-    </div>
+        <label for="usuario">Nombre de Usuario</label><br>
+        <input type="text" id="usuario" name="nombre_usuario" class="form-control" placeholder="👤 Ingresá un nombre de usuario" required><br>
 
-    <div class="mb-3">
-        <label for="contraseña_usuario" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="contraseña_usuario" 
-               name="contraseña_usuario" required>
-    </div>
+        <label for="mail">E-Mail</label><br>
+        <input type="email" id="mail" name="email_usuario" class="form-control" placeholder="📧 Escribí tu e-mail" required><br>
 
-    <div class="mb-3">
-        <label for="telefono_usuario" class="form-label">Teléfono</label>
-        <input type="text" class="form-control" id="telefono_usuario" 
-               name="telefono_usuario" required>
-    </div>
+        <label for="confirmar_mail">Confirmar E-Mail</label><br>
+        <input type="email" id="confirmar_mail" name="email_confirmacion" class="form-control" placeholder="📧 Repetí tu e-mail" required><br>
 
-    <div class="mb-3">
-        <label for="direccion_usuario" class="form-label">Dirección</label>
-        <input type="text" class="form-control" id="direccion_usuario" 
-               name="direccion_usuario" required>
-    </div>
+        <label for="password_user">Contraseña</label><br>
+        <input type="password" id="password_user" name="contraseña_usuario" class="form-control" placeholder="🔒 Elegí una contraseña" required><br>
+    </section>
 
-    <div class="mb-3">
-        <label for="dni_usuario" class="form-label">DNI</label>
-        <input type="number" class="form-control" id="dni_usuario" 
-               name="dni_usuario" required>
-    </div>
+    <!-- Información de contacto -->
+    <section>
+        <h2>Datos de contacto</h2>
 
-    <button type="submit" class="btn btn-primary w-100">
-        Registrarse
-    </button>
+        <label for="nro_telefono">Teléfono</label><br>
+        <input type="number" id="nro_telefono" name="telefono_usuario" class="form-control" placeholder="📱 Número de teléfono" required><br>
+
+        <label for="direccion_user">Dirección</label><br>
+        <input type="text" id="direccion_user" name="direccion_usuario" class="form-control" placeholder="🏡 Tu dirección" required><br>
+
+        <label for="dni_user">DNI</label><br>
+        <input type="number" id="dni_user" name="dni_usuario" class="form-control" placeholder="🪪 Número de DNI" required><br>
+
+        
+    </section>
+
+    <button type="submit" id="envio" class="btn-formulario">Registrarme</button>
+
 </form>
 
-<p>¿Ya tenés cuenta? Podés iniciar sesión 
-    <a href="{{ url_for('iniciar_sesion_bp.iniciar_sesion') }}">desde acá</a>.
-</p>
+<p>¿Ya tenés cuenta? Podés iniciar sesión <a href="{{ url_for('iniciar_sesion_bp.iniciar_sesion') }}">desde acá</a>.</p>
 
 {% endblock %}

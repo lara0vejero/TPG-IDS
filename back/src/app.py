@@ -1,5 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
+from dotenv import load_dotenv
+load_dotenv()
 
 from routes.carga_libros import cargar_libros_bp
 from routes.cargar_libros_imagenes import carga_libros_imagenes_bp
