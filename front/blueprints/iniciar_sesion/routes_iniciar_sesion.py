@@ -21,9 +21,10 @@ def iniciar_sesion():
 
     # Datos que se envían al backend
     payload = {
-        "identificador": usuario_input,
+        "email_nombre_usuario": usuario_input,
         "contraseña": clave_input
     }
+
 
     backend_url = current_app.config.get("BACK_URL")
     login_response = requests.post(f"{backend_url}/datos/login", json=payload)
